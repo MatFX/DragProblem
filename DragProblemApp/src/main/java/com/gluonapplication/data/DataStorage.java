@@ -9,7 +9,7 @@ import com.gluonapplication.interfaces.IVisible;
 public class DataStorage 
 {
 	
-	public List<IVisible> getDataList()
+	public static List<IVisible> getDataList()
 	{
 		List<IVisible> returnValue = new ArrayList<IVisible>();
 		returnValue.add(new ViewObject("Item 1"));
