@@ -11,8 +11,15 @@ import javafx.scene.layout.VBox;
 
 public class BasicView extends View {
 
+	
+	
+	
     public BasicView() {
         
+    	
+    	
+    	
+    	
         Label label = new Label("Hello JavaFX World!");
 
         Button button = new Button("Change the World!");
@@ -26,10 +33,6 @@ public class BasicView extends View {
     }
 
     @Override
-    protected void updateAppBar(AppBar appBar) {
-        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> System.out.println("Menu")));
-        appBar.setTitleText("Basic View");
-        appBar.getActionItems().add(MaterialDesignIcon.SEARCH.button(e -> System.out.println("Search")));
-    }
+    protected void updateAppBar(AppBar appBar) {}
     
 }
