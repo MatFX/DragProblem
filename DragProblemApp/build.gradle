@@ -23,13 +23,24 @@ dependencies {
 }
 
 jfxmobile {
+	javacEncoding = 'utf-8'
     downConfig {
         version = '3.8.6'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
-    android {
+    android 
+    {
         manifest = 'src/android/AndroidManifest.xml'
+        androidSdk = 'D:/Program Files (x86)/Android/android-sdk'
+        compileSdkVersion = '19'
+        packagingOptions {
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/NOTICE.txt'    
+        }   
+    	
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
