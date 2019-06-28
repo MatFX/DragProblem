@@ -44,7 +44,7 @@ public class CardPaneItem extends HBox
 				Dragboard dragboard = CardPaneItem.this.startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				
-				//quick and dirty; change image snapshot color
+				//quick and dirty; changed color of item before the snapshot
 				CardPaneItem.this.setStyle("-fx-background-color: #FF0000");
 				Image imageSnapshot = CardPaneItem.this.snapshot(null, null);
 				//reset color
