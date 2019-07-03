@@ -1,8 +1,9 @@
 package com.gluonapplication.alternate;
 
-import com.gluonapplication.alternate.item.CardPaneItem;
 import com.gluonapplication.interfaces.IVisible;
 import com.gluonhq.charm.glisten.control.CardPane;
+
+import javafx.scene.control.Control;
 
 public class MoveItemPresenter
 {
@@ -60,6 +61,12 @@ public class MoveItemPresenter
 			instance.cardPane.getItems().set(indexToSwap, instance.itemToMove);
 			instance.cardPane.getItems().set(indexOfItem, swapIVisible);
 			
+
+			//TODO
+			UtilFx.scrollToIndex((Control)instance.cardPane.lookup(".list-view"), indexToSwap);
+			
+			//instance.cardPane.scrollTo(instance.itemToMove);
+			
 		}
 	}
 	
@@ -73,7 +80,20 @@ public class MoveItemPresenter
 			
 			instance.cardPane.getItems().set(indexToSwap, instance.itemToMove);
 			instance.cardPane.getItems().set(indexOfItem, swapIVisible);
+		
+			//charm-list-view
+			
+			//list-view
+			
+			System.out.println(">> " + instance.cardPane.lookup(".list-view"));
+			
+			
+			//TODO
+			UtilFx.scrollToIndex((Control)instance.cardPane.lookup(".list-view"), indexToSwap);
+			
+			//instance.cardPane.scrollTo(instance.itemToMove);
 		}
+		
 	}
 
 

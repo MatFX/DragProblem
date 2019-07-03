@@ -15,12 +15,12 @@ public class DataStorage
 		returnValue.add(new ViewObject("Item 1"));
 		returnValue.add(new ViewObject("Item 2"));
 		returnValue.add(new ViewObject("Item 3"));
-//		returnValue.add(new ViewObject("Item 4"));
-//		returnValue.add(new ViewObject("Item 5"));
-//		returnValue.add(new ViewObject("Item 6"));
-//		returnValue.add(new ViewObject("Item 7"));
-//		returnValue.add(new ViewObject("Item 8"));
-//		returnValue.add(new ViewObject("Item 9"));
+		returnValue.add(new ViewObject("Item 4"));
+		returnValue.add(new ViewObject("Item 5"));
+		returnValue.add(new ViewObject("Item 6"));
+		returnValue.add(new ViewObject("Item 7"));
+		returnValue.add(new ViewObject("Item 8"));
+		returnValue.add(new ViewObject("Item 9"));
 		return returnValue;
 	}
 

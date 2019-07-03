@@ -5,7 +5,6 @@ import java.util.List;
 import com.gluonapplication.alternate.item.CardPaneItem;
 import com.gluonapplication.data.DataStorage;
 import com.gluonapplication.interfaces.IVisible;
-
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.CardCell;
 import com.gluonhq.charm.glisten.control.CardPane;
@@ -16,6 +15,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -30,8 +31,20 @@ public class TestView extends View
 	
     public TestView() {
     	
-    	cardPane = new CardPane<IVisible>();
     	
+    	ListView listView = new ListView<IVisible>();
+    	
+    	cardPane = new CardPane<IVisible>();
+    	cardPane.setOnScroll(new EventHandler<ScrollEvent>() 
+    	{
+            @Override 
+            public void handle(ScrollEvent event) 
+            {
+            	System.out.println("event<"+event+">");
+                
+                event.consume();
+            }
+        });
     	cardPane.setCellFactory(p -> new CardCell<IVisible>() 
 		{
 			private final CardPaneItem cardPaneItem;
@@ -120,6 +133,33 @@ public class TestView extends View
     	hBox.getChildren().addAll(createSpacer(), up, createSpacer(), down, createSpacer(), clearSelect, createSpacer());
     	//setBottom hinzufügen und entfernen?
     	this.setBottom(hBox);
+    	
+    	/*
+    	MobileApplication.getInstance().getGlassPane().setOnMousePressed(new EventHandler<MouseEvent>()
+    	{
+
+			@Override
+			public void handle(MouseEvent event) 
+			{
+				System.out.println("mousePressed ");
+				
+			}
+    		
+    	});
+    	
+    	MobileApplication.getInstance().getGlassPane().setOnMouseReleased(new EventHandler<MouseEvent>()
+    	{
+
+			@Override
+			public void handle(MouseEvent event) 
+			{
+				System.out.println("mouseReleased ");
+				
+			}
+    		
+    	});*/
+    	
+    	
     }
 
     @Override

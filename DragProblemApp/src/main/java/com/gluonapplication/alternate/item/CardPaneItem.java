@@ -2,9 +2,10 @@ package com.gluonapplication.alternate.item;
 
 import java.util.Timer;
 
-import com.gluonapplication.alternate.task.LongPressedTimerTask;
+import com.gluonapplication.alternate.MoveItemPresenter;
 import com.gluonapplication.interfaces.IVisible;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -23,9 +24,11 @@ public class CardPaneItem extends HBox
 	
 	private Label label;
 	
-	
+	private boolean isReleasedReceived = false;
 	
 	private Timer timerLongPressed;
+	
+	private long startTimePressed = Long.MIN_VALUE;
 	
 	public CardPaneItem()
 	{
@@ -39,14 +42,13 @@ public class CardPaneItem extends HBox
 		//add label in the middle of the hbox
 		this.getChildren().addAll(createSpacer(), label, createSpacer());
 		
-		
+		//das muss in die Oberfläche und nicht am item oder
 		this.setOnMousePressed(new EventHandler<MouseEvent>() 
 		{
 			@Override
 			public void handle(MouseEvent event) 
 			{
-				startLongPressedTimer();
-				
+				startTimePressed = System.currentTimeMillis();
 			}
 			
 		});
@@ -55,8 +57,20 @@ public class CardPaneItem extends HBox
 
 			@Override
 			public void handle(MouseEvent event) {
-				//stop long pressed when timer is running
-				stopLongPressedTimer();
+				
+				//nicht so schön von der Handhabung aber weniger Probleme beim sliden
+				long currentTime = System.currentTimeMillis();
+				if(startTimePressed != Long.MIN_VALUE && startTimePressed + 1000 < currentTime)
+				{
+
+					Platform.runLater(() ->
+					{
+						MoveItemPresenter.addMoveItem(iVisible);
+						
+					});
+				}
+				
+				startTimePressed = Long.MIN_VALUE;
 				
 			}
 			
@@ -64,40 +78,12 @@ public class CardPaneItem extends HBox
 	}
 	
 
-	/**
-	 * 
-	 */
-	public void startLongPressedTimer() 
-	{
-		if(timerLongPressed != null)
-		{
-			//zurücksetzen
-			timerLongPressed.cancel();
-			timerLongPressed.purge();
-		}
-		
-		timerLongPressed = new Timer();
-		//> 500ms is long pressed
-		timerLongPressed.schedule(new LongPressedTimerTask(iVisible), 500 * 1);
-	}
 	
-	/**
-	 * es kann sein, dass der Timer noch nicht ausgelöst wurde deswegen die etwaige Verarbeitung stoppen
-	 */
-	public void stopLongPressedTimer()
-	{
-		if(timerLongPressed != null)
-		{
-			timerLongPressed.cancel();
-			timerLongPressed.purge();
-		}
-		
-	}
 	
 	public void setSelectedLongPressed(boolean isSelectedLongPressed)
 	{
 		this.iVisible.setSelectedLongPressed(isSelectedLongPressed);
-		this.changeItemStyle();
+		//this.changeItemStyle();
 		
 		
 		
@@ -125,17 +111,19 @@ public class CardPaneItem extends HBox
 	public void setIVisible(IVisible iVisible)
 	{
 		this.iVisible = iVisible;
+		
 		//this.iVisible.getLongPressedProperty().addListener(listener);
 		this.iVisible.getLongPressedProperty().addListener(new ChangeListener<Boolean>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				System.out.println("newValue " + newValue);
 				changeItemStyle();
 				
 			}
 			
 		});
-		
+		//this.iVisible.getLongPressedProperty().unbind();
 		label.setText(iVisible.getDescription());
 		//change the colorization
 		changeItemStyle();
@@ -161,6 +149,8 @@ public class CardPaneItem extends HBox
     {
     	return iVisible;
     }
+    
+   
 
 
 }
