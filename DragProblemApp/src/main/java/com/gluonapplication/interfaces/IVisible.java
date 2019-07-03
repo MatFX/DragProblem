@@ -12,4 +12,8 @@ public interface IVisible
 {
 
 	public String getDescription();
+	
+	public boolean isLongPressed();
+	
+	public void setLongPressed(boolean isLongPressed);
 }

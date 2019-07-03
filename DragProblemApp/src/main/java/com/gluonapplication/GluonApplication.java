@@ -1,5 +1,6 @@
 package com.gluonapplication;
 
+import com.gluonapplication.alternate.TestView;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
@@ -10,7 +11,11 @@ public class GluonApplication extends MobileApplication {
 
     @Override
     public void init() {
-        addViewFactory(HOME_VIEW, BasicView::new);
+    	//first try with dragboard..failure
+       // addViewFactory(HOME_VIEW, BasicView::new);
+        
+        //alternative implementation
+        addViewFactory(HOME_VIEW, TestView::new);
     }
 
     @Override
