@@ -2,11 +2,13 @@ package com.gluonapplication.impl;
 
 import com.gluonapplication.interfaces.IVisible;
 
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class ViewObject implements IVisible
 {
 	private String description;
 	
-	private boolean isLongPressedSelected = false;
+	private SimpleBooleanProperty isLongPressedSelected = new SimpleBooleanProperty(false);
 
 	public ViewObject(String description)
 	{
@@ -20,13 +22,18 @@ public class ViewObject implements IVisible
 	}
 
 	@Override
-	public boolean isLongPressed() {
-		return isLongPressedSelected;
+	public boolean isSelectedLongPressed() {
+		return isLongPressedSelected.get();
 	}
 
 	@Override
-	public void setLongPressed(boolean isLongPressed) {
-		this.isLongPressedSelected = isLongPressed;
+	public void setSelectedLongPressed(boolean isLongPressed) {
+		this.isLongPressedSelected.set(isLongPressed);
+	}
+	
+	public SimpleBooleanProperty getLongPressedProperty()
+	{
+		return isLongPressedSelected;
 	}
 
 }

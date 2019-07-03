@@ -4,6 +4,9 @@ import java.util.Timer;
 
 import com.gluonapplication.alternate.task.LongPressedTimerTask;
 import com.gluonapplication.interfaces.IVisible;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -20,7 +23,7 @@ public class CardPaneItem extends HBox
 	
 	private Label label;
 	
-	//private boolean isSelectedLongPressed = false;
+	
 	
 	private Timer timerLongPressed;
 	
@@ -75,7 +78,7 @@ public class CardPaneItem extends HBox
 		
 		timerLongPressed = new Timer();
 		//> 500ms is long pressed
-		timerLongPressed.schedule(new LongPressedTimerTask(this), 500 * 1);
+		timerLongPressed.schedule(new LongPressedTimerTask(iVisible), 500 * 1);
 	}
 	
 	/**
@@ -93,16 +96,17 @@ public class CardPaneItem extends HBox
 	
 	public void setSelectedLongPressed(boolean isSelectedLongPressed)
 	{
-		this.iVisible.setLongPressed(isSelectedLongPressed);
+		this.iVisible.setSelectedLongPressed(isSelectedLongPressed);
 		this.changeItemStyle();
+		
 		
 		
 	}
 	
 	private void changeItemStyle() 
 	{
-		System.out.println(" this.iVisible.isLongPressed() + " + this.iVisible.isLongPressed());
-		if(this.iVisible.isLongPressed())
+		System.out.println(" this.iVisible.isLongPressed() + " + this.iVisible.isSelectedLongPressed());
+		if(this.iVisible.isSelectedLongPressed())
 		{
 			this.setStyle("-fx-background-color: #FF0000");
 		}
@@ -121,6 +125,17 @@ public class CardPaneItem extends HBox
 	public void setIVisible(IVisible iVisible)
 	{
 		this.iVisible = iVisible;
+		//this.iVisible.getLongPressedProperty().addListener(listener);
+		this.iVisible.getLongPressedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				changeItemStyle();
+				
+			}
+			
+		});
+		
 		label.setText(iVisible.getDescription());
 		//change the colorization
 		changeItemStyle();

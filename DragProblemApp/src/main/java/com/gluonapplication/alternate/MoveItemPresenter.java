@@ -8,7 +8,7 @@ public class MoveItemPresenter
 {
 	private static MoveItemPresenter instance = new MoveItemPresenter();
 	
-	private CardPaneItem itemToMove;
+	private IVisible itemToMove;
 	
 	private CardPane<IVisible> cardPane;
 	
@@ -17,7 +17,7 @@ public class MoveItemPresenter
 	}	
 	
 	
-	public static void addMoveItem(CardPaneItem cardPaneItem)
+	public static void addMoveItem(IVisible cardPaneItem)
 	{
 		//reset the visu from the previous selected item
 		if(instance.itemToMove != null)
@@ -50,14 +50,14 @@ public class MoveItemPresenter
 	public static void moveUp() 
 	{
 		//get the current index; the items in the CardPane are ViewObjects!
-		int indexOfItem = instance.cardPane.getItems().indexOf(instance.itemToMove.getIVisible());
+		int indexOfItem = instance.cardPane.getItems().indexOf(instance.itemToMove);
 	
 		if(indexOfItem > 0)
 		{
 			int indexToSwap = indexOfItem - 1;
 			IVisible swapIVisible = instance.cardPane.getItems().get(indexToSwap);
 		
-			instance.cardPane.getItems().set(indexToSwap, instance.itemToMove.getIVisible());
+			instance.cardPane.getItems().set(indexToSwap, instance.itemToMove);
 			instance.cardPane.getItems().set(indexOfItem, swapIVisible);
 			
 		}
@@ -65,13 +65,13 @@ public class MoveItemPresenter
 	
 	public static void moveDown()
 	{
-		int indexOfItem = instance.cardPane.getItems().indexOf(instance.itemToMove.getIVisible());
+		int indexOfItem = instance.cardPane.getItems().indexOf(instance.itemToMove);
 		if(indexOfItem < instance.cardPane.getItems().size()-1)
 		{
 			int indexToSwap = indexOfItem + 1;
 			IVisible swapIVisible = instance.cardPane.getItems().get(indexToSwap);
 			
-			instance.cardPane.getItems().set(indexToSwap, instance.itemToMove.getIVisible());
+			instance.cardPane.getItems().set(indexToSwap, instance.itemToMove);
 			instance.cardPane.getItems().set(indexOfItem, swapIVisible);
 		}
 	}

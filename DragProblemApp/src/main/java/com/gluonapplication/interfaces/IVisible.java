@@ -1,6 +1,6 @@
 package com.gluonapplication.interfaces;
 
-
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * Eine Schnittstelle, die alle Objekte implementieren müssen,
@@ -13,7 +13,9 @@ public interface IVisible
 
 	public String getDescription();
 	
-	public boolean isLongPressed();
+	public boolean isSelectedLongPressed();
 	
-	public void setLongPressed(boolean isLongPressed);
+	public void setSelectedLongPressed(boolean isLongPressed);
+	
+	public SimpleBooleanProperty getLongPressedProperty();
 }

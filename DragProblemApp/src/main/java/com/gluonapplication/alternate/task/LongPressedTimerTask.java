@@ -4,6 +4,7 @@ import java.util.TimerTask;
 
 import com.gluonapplication.alternate.MoveItemPresenter;
 import com.gluonapplication.alternate.item.CardPaneItem;
+import com.gluonapplication.interfaces.IVisible;
 
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
@@ -17,11 +18,11 @@ import javafx.scene.input.MouseEvent;
 public class LongPressedTimerTask extends TimerTask
 {
 	
-	private CardPaneItem cardPaneItem;
+	private IVisible iVisible;
 	
-	public LongPressedTimerTask(CardPaneItem cardPaneItem)
+	public LongPressedTimerTask(IVisible iVisible)
 	{
-		this.cardPaneItem = cardPaneItem;
+		this.iVisible = iVisible;
 	}
 	
 	
@@ -32,7 +33,7 @@ public class LongPressedTimerTask extends TimerTask
 	{
 		Platform.runLater(() ->
 		{
-			MoveItemPresenter.addMoveItem(cardPaneItem);
+			MoveItemPresenter.addMoveItem(iVisible);
 			
 		});
 			
