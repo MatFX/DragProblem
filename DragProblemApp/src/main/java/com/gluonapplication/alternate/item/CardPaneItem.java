@@ -105,7 +105,7 @@ public class CardPaneItem extends HBox
 
 	public boolean isSelectedLongPressed()
 	{
-		return this.isVisible();
+		return this.iVisible.isSelectedLongPressed();
 	}
 	
 	public void setIVisible(IVisible iVisible)
