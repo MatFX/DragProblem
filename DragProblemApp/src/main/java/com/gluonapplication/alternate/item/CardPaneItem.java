@@ -83,15 +83,11 @@ public class CardPaneItem extends HBox
 	public void setSelectedLongPressed(boolean isSelectedLongPressed)
 	{
 		this.iVisible.setSelectedLongPressed(isSelectedLongPressed);
-		//this.changeItemStyle();
-		
-		
-		
 	}
 	
 	private void changeItemStyle() 
 	{
-		System.out.println(" this.iVisible.isLongPressed() + " + this.iVisible.isSelectedLongPressed());
+		
 		if(this.iVisible.isSelectedLongPressed())
 		{
 			this.setStyle("-fx-background-color: #FF0000");
@@ -112,12 +108,10 @@ public class CardPaneItem extends HBox
 	{
 		this.iVisible = iVisible;
 		
-		//this.iVisible.getLongPressedProperty().addListener(listener);
 		this.iVisible.getLongPressedProperty().addListener(new ChangeListener<Boolean>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				System.out.println("newValue " + newValue);
 				changeItemStyle();
 				
 			}
